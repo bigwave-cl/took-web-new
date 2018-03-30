@@ -1,0 +1,184 @@
+/*
+* @Author: askMeWhy
+* @Date:   2017-10-23 15:05:07
+* @Last Modified by:   smile
+* @Last Modified time: 2017-11-09 16:45:39
+*/
+
+@import '~@/styles/mixins', '~@/styles/variables';
+.ask-lottery-home {
+	width: 100%;
+	.lottery-home-box {
+		width: 100%;
+		padding: 20px 15px 0;
+		background: no-repeat url('~@/assets/lottery/lottery_home_bg.png') transparent;
+		background-position: center top;
+		background-size: 100% auto;
+		&.is-null{
+			height: 100%;
+			padding: 0;
+			@include flexLayout(flex,center,center);
+			.is-null-text{
+				color: map-get($color,200);
+				font-size: 2.4rem;
+				white-space: nowrap;
+			}
+		}
+	}
+	.ver-box {
+		@include flexLayout(flex, normal, normal);
+		.an-box {
+			position: relative;
+			overflow: hidden;
+			width: 54%;
+			min-height: 114px;
+			-webkit-box-flex: 0;
+			-ms-flex: 0 0 auto;
+			flex: 0 0 auto;
+			.ask-lottery-animation-box.lottery-home {
+				position: absolute;
+				top: 0;
+				right: 0;
+				left: 0;
+				width: 100%;
+				.lottery-pic-bg {
+					-webkit-transform: scale(.66);
+					transform: scale(.66);
+					-webkit-transform-origin: 0 0;
+					transform-origin: 0 0;
+				}
+			}
+		}
+		.info {
+			position: relative;
+			width: 45%;
+			-webkit-box-flex: 1;
+			-ms-flex: 1 0 auto;
+			flex: 1 0 auto;
+			.luck-number-box{
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				-webkit-transform: translateY(25%);
+				        transform: translateY(25%);
+			}
+			.title {
+				width: 100%;
+				text-align: center;
+				white-space: nowrap;
+				h3 {
+					font-size: 1.4rem;
+					font-weight: normal;
+					display: inline-block;
+					margin: 0;
+					vertical-align: middle;
+					color: map-get($color, 300);
+				}
+				.ask-button {
+					line-height: 12px;
+					display: inline-block;
+					width: 16px;
+					min-width: auto;
+					height: 16px;
+					padding: 0;
+					vertical-align: middle;
+					color: rgba(map-get($color, 400D3), .5);
+					border-radius: 100%;
+					background-color: map-get($color, 200);
+					.iconfont {
+						font-size: 1.2rem;
+					}
+				}
+			}
+			.text {
+				font-size: 1.4rem;
+				padding: 4px 0;
+				-webkit-transform: scale(1.1);
+				transform: scale(1.1);
+				text-align: center;
+				word-break: break-all;
+				color: map-get($color, 300);
+				&>small {
+					font-size: 1.2rem;
+					display: inline-block;
+					-webkit-transform: translateY(-6%);
+					transform: translateY(-6%);
+					word-break: break-all;
+				}
+				&.large {
+					font-size: 1.6rem;
+					&>small {
+						font-size: 1.4rem;
+					}
+				}
+			}
+			.button-group {
+				padding: 8px 0;
+				text-align: center;
+				.ask-button {
+					font-size: 1.2rem;
+					min-width: auto;
+					padding: 4px 12px;
+					color: map-get($color, 100);
+					border-radius: 2px;
+					background-color: map-get($color, 300S1);
+				}
+			}
+			.reciprocal-body {
+				width: 100%;
+				padding-top: 10px;
+			}
+		}
+	}
+	.col-box {
+		font-size: 1.2rem;
+		width: 100%;
+		padding: 4px 0;
+		color: map-get($color, 200);
+		.chance {
+			width: 100%;
+			em {
+				font-style: normal;
+				margin-left: 2px;
+				color: map-get($color, 300);
+			}
+			.ask-button {
+				font-size: 1.3rem;
+				min-width: auto;
+				padding: 0;
+				border-radius: 100%;
+				.iconfont {
+					font-size: 1.3rem;
+					color: map-get($color, 200);
+				}
+			}
+		}
+	}
+}
+
+@media (max-width: 376px) {
+	.ask-lottery-home .ver-box .an-box .ask-lottery-animation-box.lottery-home .lottery-pic-bg {
+		-webkit-transform: scale(.62);
+		transform: scale(.62);
+	}
+}
+
+@media (max-width: 350px) {
+	.ask-lottery-home .ver-box .info .title h3 {
+		font-size: 1.2rem;
+	}
+	.ask-lottery-home .ver-box .info .text.large {
+		font-size: 1.4rem;
+		&>small {
+			font-size: 1.2rem;
+		}
+	}
+	.ask-lottery-home .ver-box .an-box {
+		min-height: 96px;
+	}
+	.ask-lottery-home .ver-box .an-box .ask-lottery-animation-box.lottery-home .lottery-pic-bg {
+		-webkit-transform: scale(.52);
+		transform: scale(.52);
+	}
+}

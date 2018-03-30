@@ -1,0 +1,368 @@
+/*
+* @Author: askMeWhy
+* @Date:   2017-10-11 18:08:00
+* @Last Modified by:   smile
+* @Last Modified time: 2017-11-03 16:46:06
+*/
+
+@import '~@/styles/mixins', '~@/styles/variables';
+.ask-modal.calendar {
+	width: auto;
+	padding: 0;
+	.ask-modal-body {
+		padding: 0;
+	}
+	.ask-modal-footer {
+		padding: 10px 10px;
+		.ask-button.time {
+			margin-right: auto;
+		}
+	}
+}
+
+.ask-calendar-box {
+	overflow: hidden;
+	width: 400px;
+	.ac-monthly {
+		width: 100%;
+		height: 80px;
+		background-color: map-get($calendar, 300);
+		@include flexLayout(flex, normal, normal);
+		.ask-button {
+			min-width: auto;
+			padding: 0;
+		}
+		.arrow-left, .arrow-right {
+			position: relative;
+			width: 40px;
+			-webkit-box-flex: 0;
+			-ms-flex: 0 0 40px;
+			flex: 0 0 40px;
+		}
+		.arrow-left {
+			&::after {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				display: block;
+				width: 18px;
+				height: 18px;
+				margin: -9px 0 0 -5px;
+				content: '';
+				-webkit-transform: rotate(135deg);
+				transform: rotate(135deg);
+				border-right: 2px solid map-get($calendar, 100);
+				border-bottom: 2px solid map-get($calendar, 100);
+			}
+		}
+		.arrow-right {
+			&::after {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				display: block;
+				width: 18px;
+				height: 18px;
+				margin: -9px 0 0 -14px;
+				content: '';
+				-webkit-transform: rotate(-45deg);
+				transform: rotate(-45deg);
+				border-right: 2px solid map-get($calendar, 100);
+				border-bottom: 2px solid map-get($calendar, 100);
+			}
+		}
+		.ac-caption {
+			width: calc( 100% - 40px * 2);
+			-webkit-box-flex: 1;
+			-ms-flex: 1 0 auto;
+			flex: 1 0 auto;
+			.ask-button {
+				font-size: 1.8rem;
+				width: 100%;
+				color: map-get($calendar, 100);
+				&.btn-year {
+					font-size: 1.8rem;
+					height: 50%;
+					padding-top: 2%;
+				}
+				&.btn-month {
+					font-size: 2.2rem;
+					height: 50%;
+				}
+			}
+		}
+	}
+}
+
+
+/* 日历面板 */
+
+.ask-calendar-box {
+	.ac-body {
+		width: 100%;
+		height: 300px;
+		.ac-picker {
+			width: 100%;
+			height: 100%;
+			.ac-title {
+				width: 100%;
+				ul {
+					@include flexLayout(flex, justify, center);
+					li {
+						text-align: center;
+						-webkit-box-flex: 1;
+						-ms-flex: 1 0 auto;
+						flex: 1 0 auto;
+						span {
+							font-size: 1.4rem;
+							display: inline-block;
+							width: 100%;
+							padding: 10px 0;
+							color: map-get($calendar, 400);
+						}
+					}
+				}
+			}
+			.ac-list {
+				width: 100%;
+				.day-list {
+					@include flexLayout(flex, justify, center);
+					li {
+						text-align: center;
+						-webkit-box-flex: 1;
+						-ms-flex: 1 0 auto;
+						flex: 1 0 auto;
+						span.day {
+							font-size: 1.4rem;
+							position: relative;
+							z-index: 2;
+							display: inline-block;
+							width: 100%;
+							padding: 12px 0;
+							cursor: pointer;
+							color: map-get($calendar, 400);
+							&::after {
+								position: absolute;
+								z-index: -1;
+								top: 50%;
+								left: 50%;
+								display: block;
+								width: 40px;
+								height: 40px;
+								margin: -20px 0 0 -20px;
+								content: '';
+								-webkit-transition: all .3s linear;
+								transition: all .3s linear;
+								-webkit-transform: translateZ(0);
+								transform: translateZ(0);
+								opacity: 0;
+								border: 1px solid rgba(map-get($calendar, 300), .8);
+								border-radius: 100%;
+								background-color: rgba(map-get($calendar, 300), .5);
+							}
+							&:hover::after {
+								-webkit-transition: all .3s linear;
+								transition: all .3s linear;
+								opacity: 1;
+							}
+						}
+						&.active span.day::after {
+							-webkit-transition: all .3s linear;
+							transition: all .3s linear;
+							opacity: 1;
+							border: 1px solid rgba(map-get($calendar, 200), 1);
+							background-color: rgba(map-get($calendar, 200), .8);
+						}
+						&.unavailable span.day {
+							color: rgba(map-get($calendar, 500), .5);
+						}
+						&.not-use span.day {
+							cursor: not-allowed;
+							color: rgba(map-get($calendar, 500), .5);
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/* 月份列表,年份列表 */
+
+.ask-calendar-box {
+	.ac-body {
+		.ac-picker {
+			.month-list {
+				padding: 50px 0 0;
+				@include flexLayout(flex, justify, center);
+				li {
+					margin: 0 8px;
+					text-align: center;
+					-webkit-box-flex: 1;
+					-ms-flex: 1 0 auto;
+					flex: 1 0 auto;
+					.ask-button {
+						width: 100%;
+						min-width: auto;
+					}
+				}
+			}
+			&.year {
+				.ac-list {
+					overflow-y: auto;
+					width: 100%;
+					height: 100%;
+					&::-webkit-scrollbar {
+						width: 10px;
+						background-color: transparent;
+					}
+					&::-webkit-scrollbar-track {
+						border-radius: 0;
+						background-color: map-get($calendar, 600);
+						/* -webkit-box-shadow: inset 0 0 3px rgba(0, 0, 0, .2);
+					    box-shadow: inset 0 0 3px rgba(0, 0, 0, .2); */
+					}
+					&::-webkit-scrollbar-thumb {
+						border-radius: 4px;
+						background-color: rgba(map-get($calendar, 500), .4);
+					}
+					&::-webkit-scrollbar-thumb:hover {
+						background-color: rgba(map-get($calendar, 500), .6);
+					}
+					&::-webkit-scrollbar-thumb:active {
+						background-color: rgba(map-get($calendar, 300), 1);
+					}
+					.year-list {
+						width: 100%;
+						li {
+							width: 100%;
+							.ask-button {
+								font-size: 1.8rem;
+								width: 100%;
+								padding: 16px 0;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+
+/* 时间选择列表 */
+
+.ask-calendar-box {
+	.ac-body {
+		.ac-list {
+			width: 100%;
+			height: calc(100% - 60px);
+			.time-list {
+				width: 100%;
+				@include flexLayout(flex, justify, center);
+				-webkit-box-orient: horizontal;
+				-webkit-box-direction: normal;
+				-ms-flex-flow: row wrap;
+				flex-flow: row wrap;
+				li {
+					width: 12.5%;
+					-webkit-box-flex: 0;
+					-ms-flex: 0 0 12.5%;
+					flex: 0 0 12.5%;
+					.ask-button {
+						font-size: 1.8rem;
+						position: relative;
+						min-width: auto;
+						margin: 16px 4px;
+						&::after {
+							position: absolute;
+							z-index: -1;
+							top: 0;
+							left: 0;
+							display: block;
+							width: 100%;
+							height: 100%;
+							content: '';
+							-webkit-transition: all .3s linear;
+							transition: all .3s linear;
+							-webkit-transform: translateZ(0);
+							transform: translateZ(0);
+							opacity: 0;
+							border: 1px solid rgba(map-get($calendar, 300), .8);
+							border-radius: 4px;
+							background-color: rgba(map-get($calendar, 300), .5);
+						}
+					}
+					&.active {
+						.ask-button::after {
+							-webkit-transition: all .3s linear;
+							transition: all .3s linear;
+							opacity: 1;
+						}
+					}
+				}
+				&.more {
+					li {
+						width: 10%;
+						-webkit-box-flex: 0;
+						-ms-flex: 0 0 10%;
+						flex: 0 0 10%;
+						.ask-button {
+							font-size: 1.8rem;
+							min-width: auto;
+							margin: 1px 2px;
+							padding: 8px 8px;
+						}
+					}
+				}
+			}
+		}
+		.ac-picker {
+			.ac-time {
+				width: 100%;
+				ul {
+					width: 100%;
+					padding-top: 10px;
+					@include flexLayout(flex, center, normal);
+					li {
+						.ask-button {
+							font-size: 2rem;
+							min-width: auto;
+							vertical-align: middle;
+							&.p {
+								padding: 12px 4px;
+							}
+							&.time {
+								position: relative;
+								border: 1px solid rgba(map-get($calendar, 300), .8);
+								border-radius: 4px;
+								&::after {
+									position: absolute;
+									top: 0;
+									left: 50%;
+									display: block;
+									width: 0;
+									height: 0;
+									margin: -20px 0 0 -8px;
+									content: '';
+									-webkit-transition: all .3s linear;
+									transition: all .3s linear;
+									opacity: 0;
+									border-right: 8px solid transparent;
+									border-bottom: 20px solid rgba(map-get($calendar, 300), .8);
+									border-left: 8px solid transparent;
+								}
+								&.active::after {
+									-webkit-transition: all .3s linear;
+									transition: all .3s linear;
+									opacity: 1;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

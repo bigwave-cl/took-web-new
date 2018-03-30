@@ -1,0 +1,78 @@
+@import '~@/styles/variables', '~@/styles/mixins';
+.ask-lottery-animation-box {
+	.lottery-pic-bg {
+		position: relative;
+		width: 295px;
+		height: 171px;
+		margin: 0 auto;
+		background: no-repeat center top url('~@/components/ask/ask-lottery-animation/slot_machine.png') transparent;
+		background-size: auto 100%;
+	}
+	.lottery-body {
+		@include flexLayout(inline-flex, 'center', 'around');
+		position: absolute;
+		top: 28%;
+		left: 6.5%;
+		.lottery-group {
+			line-height: 49px;
+			overflow: hidden;
+			width: 60px;
+			height: 48px;
+			text-align: center;
+			.number-box {
+				pointer-events: none;
+				will-change: transform;
+				/* 第一步加速执行动画 */
+				/* 第二步匀速执行动画 */
+				&.start {
+					-webkit-animation: lottery-slide-start 3s ease-in 1, lottery-slide-process 1s linear 3s infinite;
+					animation: lottery-slide-start 3s ease-in 1, lottery-slide-process 1s linear 3s infinite;
+				}
+				/* 第三步减速执行动画 */
+				&.end {
+					-webkit-animation: lottery-slide-end 6s ease-out 1 both;
+					animation: lottery-slide-end 6s ease-out 1 both;
+				}
+				ul {
+					li {
+						font-size: 3.8rem;
+						width: 60px;
+						height: 48px;
+						color: map-get($color, 100);
+					}
+				}
+			}
+		}
+	}
+	.lottery-voice {
+		position: absolute;
+		bottom: 3%;
+		left: 48%;
+		width: 100px;
+		height: 30px;
+		-webkit-transform: translate(-50%, 0);
+		transform: translate(-50%, 0);
+		.lottery-play {
+			position: relative;
+			overflow: hidden;
+			width: 100%;
+			min-width: 0;
+			height: 100%;
+			padding: 0;
+			border-radius: 0;
+			background: no-repeat center url('~@/components/ask/ask-lottery-animation/voice_play.png') transparent;
+			background-size: auto 100%;
+			&.ask-button {
+				-webkit-transition: all 0s !important;
+				transition: all 0s !important;
+				.button-text{
+					width: 0;
+				}
+			}
+			&.pause {
+				background: no-repeat center url('~@/components/ask/ask-lottery-animation/voice_pause.png') transparent;
+				background-size: auto 100%;
+			}
+		}
+	}
+}
